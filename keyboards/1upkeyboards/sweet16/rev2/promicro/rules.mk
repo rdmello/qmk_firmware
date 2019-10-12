@@ -1,0 +1,5 @@
+MCU = atmega32u4
+BOOTLOADER = caterina
+EXTRAFLAGS += -flto
+BACKLIGHT_ENABLE = yes
+LED_MATRIX_ENABLE = direct
