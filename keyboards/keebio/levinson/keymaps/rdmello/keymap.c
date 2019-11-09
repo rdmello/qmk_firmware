@@ -22,12 +22,12 @@ enum custom_keycodes {
 
 /* COMMON ROW
  * ,-------------------------------------------------------------------------------------------.
- * |Adjust|Raise |Lower | GUI  | LOWER| GUI(SPC)| |CONTROL | RAISE| Alt  |      |      |      |
+ * |Adjust|Raise |Lower | GUI  | LOWER| GUI(SPC)| | CTL(SPC) | RAISE| Alt  |      |      |      |
  * `-------------------------------------------------------------------------------------------'
  */
 #define RYLAN_LAYOUT(...) LAYOUT_ortho_4x12( \
    __VA_ARGS__, \
-   ADJUST, RAISE, LOWER, KC_LGUI, LOWER, LGUI_T(KC_SPC),      KC_LCTL, RAISE, KC_LALT, _______, _______, _______ \
+   ADJUST, RAISE, LOWER, KC_LGUI, LOWER, LGUI_T(KC_SPC),      LCTL_T(KC_SPC), RAISE, KC_LALT, _______, _______, _______ \
 )
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -50,9 +50,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Raise
  * ,-----------------------------------------------------------------------------------.
- * |   ~  |M-BTN2| M-UP |M-BTN1|M-SRUP| HOME |  `   | -    | =    |  [   |  ]   |  Del |
+ * |   ~  |M-BTN2| M-UP |M-BTN1| PGUP | HOME |  `   | -    | =    |  [   |  ]   |  Del |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * |  ESC | M-LT | M-DN | M-RT |M-SRDN| END  | LEFT | DOWN |  UP  |RIGHT |  \   | LOCK |
+ * |  ESC | M-LT | M-DN | M-RT | PGDN | END  | LEFT | DOWN |  UP  |RIGHT |  \   | LOCK |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * |SHIFT |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  | ENTER|
  * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -60,8 +60,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_RAISE] =  RYLAN_LAYOUT( \
-  KC_TILD,        KC_BTN2, KC_MS_U, KC_BTN1, KC_WH_U, KC_HOME,      KC_GRV, KC_MINS,  KC_EQL, KC_LBRC, KC_RBRC, KC_DEL, \
-  CTL_T(KC_ESC),  KC_MS_L, KC_MS_D, KC_MS_R, KC_WH_D,  KC_END,     KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, KC_BSLS, KC_LOCK, \
+  KC_TILD,        KC_BTN2, KC_MS_U, KC_BTN1, KC_PGUP, KC_HOME,      KC_GRV, KC_MINS,  KC_EQL, KC_LBRC, KC_RBRC, KC_DEL, \
+  CTL_T(KC_ESC),  KC_MS_L, KC_MS_D, KC_MS_R, KC_PGDN,  KC_END,     KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, KC_BSLS, KC_LOCK, \
   KC_LSFT,           KC_1,    KC_2,    KC_3,    KC_4,    KC_5,        KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_ENT  \
 ),
 
@@ -69,7 +69,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------------------------------------------------.
  * |      |M-BTN2|M-SRUP|M-BTN1|      |      |  ~   |  _   |  +   |   {  |   }  |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |M-SRLT|M-SRDN|M-SRRT|      |      |FFXBCK| PGDN | PGUP |FFXFWD|   |  |      |
+ * |      |M-SRLT|M-SRDN|M-SRRT|      |      |FFXBCK|M-SRDN|M-SRUP|FFXFWD|   |  |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * |  ~   |   !  |   @  |   #  |   $  |   %  |  ^   |  &   |   *  |  (   |   )  |   |  |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
@@ -78,7 +78,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_LOWER] = RYLAN_LAYOUT( \
   _______, KC_BTN2, KC_WH_U, KC_BTN1, _______, _______,  KC_TILD,    KC_UNDS, KC_PLUS,    KC_LCBR, KC_RCBR, _______, \
-  _______, KC_WH_L, KC_WH_D, KC_WH_R, _______, _______,  G(KC_LEFT), KC_PGDN, KC_PGUP, G(KC_RGHT), KC_PIPE, _______, \
+  _______, KC_WH_L, KC_WH_D, KC_WH_R, _______, _______,  G(KC_LEFT), KC_WH_D, KC_WH_U, G(KC_RGHT), KC_PIPE, _______, \
   KC_TILD, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,  KC_CIRC,    KC_AMPR, KC_ASTR,    KC_LPRN, KC_RPRN, KC_PIPE  \
 ),
 
