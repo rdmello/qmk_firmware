@@ -22,12 +22,12 @@ enum custom_keycodes {
 
 /* COMMON ROW
  * ,-------------------------------------------------------------------------------------------.
- * |Adjust|Raise |Lower | GUI  | LOWER| GUI(SPC)| | CTL(SPC) | RAISE| Alt  |      |      |      |
+ * |Adjust|Raise |Lower | Ctrl  | LOWER| GUI(SPC)| |    SPC | RAISE| Alt | GUI |      |      |
  * `-------------------------------------------------------------------------------------------'
  */
 #define RYLAN_LAYOUT(...) LAYOUT_ortho_4x12( \
    __VA_ARGS__, \
-   ADJUST, RAISE, LOWER, KC_LGUI, LOWER, LGUI_T(KC_SPC),      LCTL_T(KC_SPC), RAISE, KC_LALT, _______, _______, _______ \
+   ADJUST, RAISE, LOWER, KC_LCTL, LOWER, LGUI_T(KC_SPC),      KC_SPC, RAISE, KC_LALT, KC_LGUI, _______, _______ \
 )
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -69,7 +69,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------------------------------------------------.
  * |      |M-BTN2|M-SRUP|M-BTN1|      |      |  ~   |  _   |  +   |   {  |   }  |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |M-SRLT|M-SRDN|M-SRRT|      |      |FFXBCK|M-SRDN|M-SRUP|FFXFWD|   |  |      |
+ * |      |M-SRLT|M-SRDN|M-SRRT|      |      |FFXBCK| PGDN | PGUP |FFXFWD|   |  |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * |  ~   |   !  |   @  |   #  |   $  |   %  |  ^   |  &   |   *  |  (   |   )  |   |  |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
@@ -78,7 +78,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_LOWER] = RYLAN_LAYOUT( \
   _______, KC_BTN2, KC_WH_U, KC_BTN1, _______, _______,  KC_TILD,    KC_UNDS, KC_PLUS,    KC_LCBR, KC_RCBR, _______, \
-  _______, KC_WH_L, KC_WH_D, KC_WH_R, _______, _______,  G(KC_LEFT), KC_WH_D, KC_WH_U, G(KC_RGHT), KC_PIPE, _______, \
+  _______, KC_WH_L, KC_WH_D, KC_WH_R, _______, _______,  G(KC_LBRC), KC_PGDN, KC_PGUP, G(KC_RBRC), KC_PIPE, _______, \
   KC_TILD, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,  KC_CIRC,    KC_AMPR, KC_ASTR,    KC_LPRN, KC_RPRN, KC_PIPE  \
 ),
 
@@ -97,7 +97,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_ACL2, KC_MUTE, KC_VOLU, _______, _______, _______,       _______, _______, _______, _______, _______, _______, \
   KC_ACL1, KC_BRID, KC_VOLD, KC_BRIU, _______, _______,       _______, _______, _______, _______, _______,  KC_F12, \
   KC_ACL0,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,         KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11, \
-  _______, _______, _______, _______, _______, MAGIC_TOGGLE_CTL_GUI,       MAGIC_TOGGLE_CTL_GUI, _______, _______, _______, _______, _______  \
+  _______, _______, _______, _______, _______, MAGIC_TOGGLE_CTL_GUI,       _______, _______, MAGIC_TOGGLE_CTL_GUI, _______, _______, _______  \
 )
 };
 

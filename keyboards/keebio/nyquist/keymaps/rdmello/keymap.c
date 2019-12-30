@@ -26,7 +26,7 @@ enum custom_keycodes {
 
 /* COMMON ROW
  * ,---------------------------------------------------------------------------------------------.
- * |Adjust|Raise |Lower | Control| LOWER|   GUI|        | SPC | RAISE| Control | Alt |    |      |
+ * |Adjust|Raise |Lower | Control| LOWER|GUI(SPC)|        | SPC | RAISE| Alt | Control |    |    |
  * `---------------------------------------------------------------------------------------------'
  */
 #define RYLAN_LAYOUT(...) LAYOUT_ortho_5x12( \
