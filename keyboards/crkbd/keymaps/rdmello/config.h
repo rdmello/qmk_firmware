@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#define USE_I2C
+//#define USE_I2C
 //#define USE_MATRIX_I2C
 
 /* Select hand configuration */
@@ -48,8 +48,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #endif
 
 #ifdef RGB_MATRIX_ENABLE
-// #   define RGB_MATRIX_KEYPRESSES // reacts to keypresses
-#   define RGB_MATRIX_KEYRELEASES // reacts to keyreleases (instead of keypresses)
+#   define RGB_MATRIX_KEYPRESSES // reacts to keypresses
+// #   define RGB_MATRIX_KEYRELEASES // reacts to keyreleases (instead of keypresses)
 // #   define RGB_DISABLE_AFTER_TIMEOUT 0 // number of ticks to wait until disabling effects
 #   define RGB_DISABLE_WHEN_USB_SUSPENDED true // turn off effects when suspended
 #   define RGB_MATRIX_FRAMEBUFFER_EFFECTS
@@ -95,7 +95,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #   define DISABLE_RGB_MATRIX_SOLID_REACTIVE_CROSS
 #   define DISABLE_RGB_MATRIX_SOLID_REACTIVE_MULTICROSS
 #   define DISABLE_RGB_MATRIX_SOLID_REACTIVE_NEXUS
-// #   define DISABLE_RGB_MATRIX_SOLID_REACTIVE_MULTINEXUS
+#   define DISABLE_RGB_MATRIX_SOLID_REACTIVE_MULTINEXUS
 #   define DISABLE_RGB_MATRIX_SPLASH
 // #   define DISABLE_RGB_MATRIX_MULTISPLASH
 #   define DISABLE_RGB_MATRIX_SOLID_SPLASH
