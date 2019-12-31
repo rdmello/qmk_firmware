@@ -1,8 +1,9 @@
 
-RGBLIGHT_ENABLE = no
+# RGBLIGHT_ENABLE = yes
 RGB_MATRIX_ENABLE = WS2812
 
 BOOTMAGIC_ENABLE = full
+# KEY_LOCK_ENABLE = yes # Approx. 1500 bytes :(
 
 # If you want to change the display of OLED, you need to change here
 SRC +=  ./lib/glcdfont.c \

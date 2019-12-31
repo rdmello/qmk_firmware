@@ -75,11 +75,11 @@ CTL_T(KC_ESC),    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                     
 
   [_ADJUST] = LAYOUT( \
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      XXXXXXX, KC_MUTE, KC_VOLU, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, XXXXXXX,\
+        RESET, KC_MUTE, KC_VOLU, XXXXXXX, XXXXXXX, RGB_TOG,                      RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, RGB_SPI, XXXXXXX,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      XXXXXXX, KC_BRID, KC_VOLD, KC_BRIU, XXXXXXX, XXXXXXX,                       RGBRST, RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD,  KC_F12,\
+      EEP_RST, KC_BRID, KC_VOLD, KC_BRIU, XXXXXXX, RGB_MOD,                      RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, RGB_SPD,  KC_F12,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      XXXXXXX,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                        KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,\
+      KC_LSFT,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                        KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,\
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                     XXXXXXX, XXXXXXX, MAGIC_TOGGLE_CTL_GUI,                      XXXXXXX, XXXXXXX, XXXXXXX\
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
@@ -200,15 +200,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           layer_off(_ADJUST);
         }
         return false;
-    case RGB_MOD:
-      #ifdef RGBLIGHT_ENABLE
-        if (record->event.pressed) {
-          rgblight_mode(RGB_current_mode);
-          rgblight_step();
-          RGB_current_mode = rgblight_config.mode;
-        }
-      #endif
-      return false;
+    // case RGB_MOD:
+    //   #ifdef RGBLIGHT_ENABLE
+    //     if (record->event.pressed) {
+    //       rgblight_mode(RGB_current_mode);
+    //       rgblight_step();
+    //       RGB_current_mode = rgblight_config.mode;
+    //     }
+    //   #endif
+    //   return false;
     case RGBRST:
       #ifdef RGBLIGHT_ENABLE
         if (record->event.pressed) {
