@@ -14,15 +14,17 @@ extern uint8_t is_master;
 // Layer names don't all need to be of the same length, obviously, and you can also skip them
 // entirely and just use numbers.
 #define _QWERTY 0
-#define _LOWER 1
-#define _RAISE 2
-#define _ADJUST 3
+#define _DVORAK 1
+#define _LOWER 2
+#define _RAISE 3
+#define _ADJUST 4
 
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
   LOWER,
   RAISE,
   ADJUST,
+  DVORAK,
   BACKLIT,
   RGBRST
 };
@@ -75,15 +77,29 @@ CTL_T(KC_ESC),    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                     
 
   [_ADJUST] = LAYOUT( \
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-        RESET, KC_MUTE, KC_VOLU, XXXXXXX, XXXXXXX, RGB_TOG,                      RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, RGB_SPI, XXXXXXX,\
+        RESET, KC_MUTE, KC_VOLU, XXXXXXX,  DVORAK, RGB_TOG,                      RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, RGB_SPI, XXXXXXX,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      EEP_RST, KC_BRID, KC_VOLD, KC_BRIU, XXXXXXX, RGB_MOD,                      RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, RGB_SPD,  KC_F12,\
+      EEP_RST, KC_BRID, KC_VOLD, KC_BRIU,  QWERTY, RGB_MOD,                      RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, RGB_SPD,  KC_F12,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LSFT,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                        KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,\
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                     XXXXXXX, XXXXXXX, MAGIC_TOGGLE_CTL_GUI,                      XXXXXXX, XXXXXXX, XXXXXXX\
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
 
+  ),
+  /* Dvorak
+   * ,-----------------------------------------------------------------------------------.
+   * | Tab  |   "  |   ,  |   .  |   P  |   Y  |   F  |   G  |   C  |   R  |   L  | Bksp |
+   * |------+------+------+------+------+-------------+------+------+------+------+------|
+   * | Esc  |   A  |   O  |   E  |   U  |   I  |   D  |   H  |   T  |   N  |   S  |  /   |
+   * |------+------+------+------+------+------|------+------+------+------+------+------|
+   * | Shift|   ;  |   Q  |   J  |   K  |   X  |   B  |   M  |   W  |   V  |   Z  |Enter |
+   * `-----------------------------------------------------------------------------------'
+   */
+  [_DVORAK] = RYLAN_LAYOUT( \
+           KC_TAB,  KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    KC_BSPC, \
+    CTL_T(KC_ESC),  KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S,    KC_SLSH, \
+          KC_LSFT,  KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    KC_SFTENT \
   )
 };
 
@@ -173,6 +189,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case QWERTY:
       if (record->event.pressed) {
         persistent_default_layer_set(1UL<<_QWERTY);
+      }
+      return false;
+    case DVORAK:
+      if (record->event.pressed) {
+        persistent_default_layer_set(1UL<<_DVORAK);
       }
       return false;
     case LOWER:
