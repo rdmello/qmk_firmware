@@ -13,34 +13,30 @@ extern uint8_t is_master;
 // The underscores don't mean anything - you can have a layer called STUFF or any other name.
 // Layer names don't all need to be of the same length, obviously, and you can also skip them
 // entirely and just use numbers.
-#define _QWERTY 0
-#define _DVORAK 1
+#define _DVORAK 0
+#define _QWERTY 1
 #define _LOWER 2
 #define _RAISE 3
 #define _ADJUST 4
 
 enum custom_keycodes {
-  QWERTY = SAFE_RANGE,
+  DVORAK = SAFE_RANGE,
+  QWERTY,
   LOWER,
   RAISE,
   ADJUST,
-  DVORAK,
   BACKLIT,
   RGBRST
 };
 
-enum macro_keycodes {
-  KC_SAMPLEMACRO,
-};
-
 /* COMMON ROW
  * ,------------------------------------------------------------.
- * | Ctrl  | LOWER| GUI(SPC)| |             |  SPC | RAISE| Alt |
+ * | GUI  | LOWER|CTRL(SPC)| |             |  SPC | RAISE| Alt |
  * `------------------------------------------------------------'
  */
 #define RYLAN_LAYOUT(...) LAYOUT( \
    __VA_ARGS__, \
-   KC_LCTL, LOWER, LGUI_T(KC_SPC),            KC_SPC, RAISE, KC_LALT   \
+   KC_LGUI, LOWER, LCTL_T(KC_SPC),            KC_SPC, RAISE, KC_LALT   \
 )
 
 
@@ -49,7 +45,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
        KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,  KC_BSPC,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-CTL_T(KC_ESC),    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, KC_QUOT,\
+GUI_T(KC_ESC),    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, KC_QUOT,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, KC_SFTENT\
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
@@ -59,7 +55,7 @@ CTL_T(KC_ESC),    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                     
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
       KC_TILD, KC_BTN2, KC_MS_U, KC_BTN1, KC_PGUP, KC_HOME,                       KC_GRV, KC_MINS,  KC_EQL, KC_LBRC, KC_RBRC,  KC_DEL,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LCTL, KC_MS_L, KC_MS_D, KC_MS_R, KC_PGDN,  KC_END,                      KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, KC_BSLS, XXXXXXX,\
+      KC_LGUI, KC_MS_L, KC_MS_D, KC_MS_R, KC_PGDN,  KC_END,                      KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, KC_BSLS, XXXXXXX,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LSFT,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_ENT\
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
@@ -69,23 +65,20 @@ CTL_T(KC_ESC),    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                     
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
        KC_TAB, KC_BTN2, KC_WH_U, KC_BTN1, XXXXXXX, XXXXXXX,                      KC_TILD, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_BSPC,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LCTL, KC_WH_L, KC_WH_D, KC_WH_R, XXXXXXX, XXXXXXX,                   G(KC_LBRC), KC_PGDN,KC_PGUP,G(KC_RBRC),KC_PIPE, XXXXXXX,\
+      KC_LGUI, KC_WH_L, KC_WH_D, KC_WH_R, XXXXXXX, XXXXXXX,                   G(KC_LBRC), KC_PGDN,KC_PGUP,G(KC_RBRC),KC_PIPE, XXXXXXX,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LSFT, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                      KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN,  KC_ENT\
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
   ),
 
-  [_ADJUST] = LAYOUT( \
+  [_ADJUST] = RYLAN_LAYOUT( \
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
         RESET, KC_MUTE, KC_VOLU, XXXXXXX,  DVORAK, RGB_TOG,                      RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, RGB_SPI, XXXXXXX,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       EEP_RST, KC_BRID, KC_VOLD, KC_BRIU,  QWERTY, RGB_MOD,                      RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, RGB_SPD,  KC_F12,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                        KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,\
+      KC_LSFT,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                        KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11\
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                    XXXXXXX, XXXXXXX, MAGIC_TOGGLE_CTL_GUI,                      XXXXXXX, XXXXXXX, XXXXXXX\
-  //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-
   ),
   /* Dvorak
    * ,-----------------------------------------------------------------------------------.
@@ -98,7 +91,7 @@ CTL_T(KC_ESC),    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                     
    */
   [_DVORAK] = RYLAN_LAYOUT( \
            KC_TAB,  KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    KC_BSPC, \
-    CTL_T(KC_ESC),  KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S,    KC_SLSH, \
+    GUI_T(KC_ESC),  KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S,    KC_SLSH, \
           KC_LSFT,  KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    KC_SFTENT \
   )
 };
