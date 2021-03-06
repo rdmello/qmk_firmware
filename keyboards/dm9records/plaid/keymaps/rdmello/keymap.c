@@ -48,20 +48,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     {TRANSPARENT_ROW}
 },
 
-[_QWERTY] = { 
-    { KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,        KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, KC_BSPC},
-    { GUIESC,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,        KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, KC_QUOT},
-    {KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,        KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  SFTENT},
-    {TRANSPARENT_ROW}
-},
-
 #define CTLSPC  LCTL_T(KC_SPC)
 #define GUISPC  LGUI_T(KC_SPC)
 [_MODIFIER] = {
     {TRANSPARENT_ROW},
     {TRANSPARENT_ROW},
     {TRANSPARENT_ROW},
-    { ADJUST,   RAISE,   LOWER, KC_LGUI,   LOWER,  CTLSPC,      KC_SPC,   RAISE, KC_LALT, _______, _______, _______},
+    { ADJUST,   RAISE,   LOWER, KC_LALT,   LOWER,  CTLSPC,      KC_SPC,   RAISE, KC_LALT, KC_LGUI, _______, _______},
+},
+
+// Better for vidya.
+[_QWERTY] = { 
+    { KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,        KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, KC_BSPC},
+    { GUIESC,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,        KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, KC_QUOT},
+    {KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,        KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  SFTENT},
+    { ADJUST,   RAISE,   LOWER, KC_LALT,   LOWER,  KC_SPC,      KC_SPC,   RAISE, KC_LALT, KC_LGUI, _______, _______},
 },
 
 #define CAPSLCK KC_CAPSLOCK
@@ -80,9 +81,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 },
 
 #define EERESET EEPROM_RESET
-#define TGLCTLG MAGIC_TOGGLE_CTL_GUI
 [_ADJUST] = {
-    {_______, KC_MUTE, KC_VOLU, _______,  DVORAK, _______,     _______, _______, _______, TGLCTLG, EERESET,   RESET},
+    {_______, KC_MUTE, KC_VOLU, _______,  DVORAK, _______,     _______, _______, _______, _______, EERESET,   RESET},
     {_______, KC_BRID, KC_VOLD, KC_BRIU,  QWERTY, _______,     _______, CAPSLCK, _______, _______, _______,  KC_F12},
     {_______,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,       KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11},
     {TRANSPARENT_ROW}

@@ -22,12 +22,12 @@ enum custom_keycodes {
 
 /* COMMON ROW
  * ,-------------------------------------------------------------------------------------------.
- * |Adjust|Raise |Lower | GUI  | LOWER| CTL(SPC)|     |    SPC | RAISE| Alt |    |      |      |
+ * |Adjust|Raise |Lower | ALT | LOWER| CTL(SPC)|     |    SPC | RAISE| Alt |    |      |      |
  * `-------------------------------------------------------------------------------------------'
  */
 #define RYLAN_LAYOUT(...) LAYOUT_ortho_4x12( \
    __VA_ARGS__, \
-   ADJUST, RAISE, LOWER, KC_LGUI, LOWER, LCTL_T(KC_SPC),      KC_SPC, RAISE, KC_LALT, _______, _______, _______ \
+   ADJUST, RAISE, LOWER, KC_LALT, LOWER, CTL_T(KC_SPC),      KC_SPC, RAISE, KC_LALT, _______, _______, _______ \
 )
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -95,8 +95,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_ADJUST] = RYLAN_LAYOUT( \
   KC_ACL2, KC_MUTE, KC_VOLU, _______,  DVORAK, _______,       _______, _______,     _______, _______, EEPROM_RESET, RESET, \
-  KC_ACL1, KC_BRID, KC_VOLD, KC_BRIU,  QWERTY, _______,       _______, KC_CAPSLOCK, _______, _______, _______,      KC_F12, \
-  _______,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,         KC_F6,   KC_F7,       KC_F8,   KC_F9,  KC_F10,      KC_F11  \
+  KC_LGUI, KC_BRID, KC_VOLD, KC_BRIU,  QWERTY, _______,       _______, KC_CAPSLOCK, _______, _______, _______,      KC_F12, \
+  KC_ACL1,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,         KC_F6,   KC_F7,       KC_F8,   KC_F9,  KC_F10,      KC_F11  \
 ),
 
 /* Qwerty

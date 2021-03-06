@@ -31,12 +31,12 @@ enum custom_keycodes {
 
 /* COMMON ROW
  * ,------------------------------------------------------------.
- * | GUI  | LOWER|CTRL(SPC)| |             |  SPC | RAISE| Alt |
+ * | Alt | LOWER|CTRL(SPC)| |             |  SPC | RAISE| Alt |
  * `------------------------------------------------------------'
  */
 #define RYLAN_LAYOUT(...) LAYOUT( \
    __VA_ARGS__, \
-   KC_LGUI, LOWER, LCTL_T(KC_SPC),            KC_SPC, RAISE, KC_LALT   \
+   KC_LALT, LOWER, LCTL_T(KC_SPC),            KC_SPC, RAISE, KC_LALT   \
 )
 
 
@@ -73,7 +73,7 @@ GUI_T(KC_ESC),    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                     
 
   [_ADJUST] = RYLAN_LAYOUT( \
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-        RESET, KC_MUTE, KC_VOLU, XXXXXXX,  DVORAK, RGB_TOG,                      RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, RGB_SPI, XXXXXXX,\
+        RESET, KC_MUTE, KC_VOLU, XXXXXXX,  DVORAK, RGB_TOG,                      RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, RGB_SPI, EEP_RST,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       EEP_RST, KC_BRID, KC_VOLD, KC_BRIU,  QWERTY, RGB_MOD,                      RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, RGB_SPD,  KC_F12,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
@@ -99,7 +99,7 @@ GUI_T(KC_ESC),    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                     
 int RGB_current_mode;
 
 void persistent_default_layer_set(uint16_t default_layer) {
-  eeconfig_update_default_layer(default_layer);
+  // eeconfig_update_default_layer(default_layer);
   default_layer_set(default_layer);
 }
 
@@ -151,7 +151,9 @@ void matrix_render_user(struct CharacterMatrix *matrix) {
     //matrix_write_ln(matrix, read_host_led_state());
     //matrix_write_ln(matrix, read_timelog());
   } else {
-    matrix_write(matrix, read_logo());
+    matrix_write_ln(matrix, read_layer_state());
+    matrix_write_ln(matrix, read_keylog());
+    // matrix_write(matrix, read_logo());
   }
 }
 
@@ -226,7 +228,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case RGBRST:
       #ifdef RGBLIGHT_ENABLE
         if (record->event.pressed) {
-          eeconfig_update_rgblight_default();
+          // eeconfig_update_rgblight_default();
           rgblight_enable();
           RGB_current_mode = rgblight_config.mode;
         }
